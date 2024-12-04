@@ -1,5 +1,8 @@
 import React from "react";
 import Navbar from "./components/Navbar";
+import Filter from "./components/Filter/Filter";
+import AccountSelector from "./components/Account/AccountSelector";
+import DateProducts from "./components/DateProducts/DateProducts";
 import Home from "./pages/Home";
 import Cart from "./pages/Cart";
 import { SnackbarProvider } from "notistack";
@@ -15,6 +18,7 @@ const App = () => {
       element: (
         <>
           <Navbar />
+          <Filter />
           <Home />
         </>
       ),
@@ -28,6 +32,17 @@ const App = () => {
           <Cart />
         </>
       ),
+    },
+     {
+      path: "/compte",
+      element: (
+        <>
+          <Navbar />
+          <AccountSelector />
+          <DateProducts />
+        </>
+      ),
+      loader: productResolver, // Attach the productResolver to the Home route
     },
   ]);
 

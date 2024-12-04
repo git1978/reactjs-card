@@ -1,0 +1,11 @@
+[
+    { "title": "all", "value": "", "selected": true },
+    { "title": "Q", "value": "Q", "selected": false },
+    { "title": "D", "value": "D", "selected": false },
+    { "title": "M", "value": "M", "selected": false },
+    { "title": "B", "value": "B", "selected": false },
+    { "title": "T", "value": "T", "selected": false },
+    { "title": "S", "value": "S", "selected": false },
+    { "title": "A", "value": "A", "selected": false },
+    { "title": "Z", "value": "Z", "selected": false }
+  ]
