@@ -1,0 +1,70 @@
+.account-item {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.account-label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.account-details {
+  display: flex;
+  align-items: center;
+}
+
+.flag-icon {
+  width: 20px;
+  height: 15px;
+  margin-right: 10px;
+}
+
+.account-number {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.chip-container {
+  margin-top: 15px;
+}
+
+.chip {
+  display: flex;
+  align-items: center;
+  background-color: #16521e;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 14px;
+  margin-top: 10px;
+  position: relative;
+}
+
+.chip-label {
+  font-weight: bold;
+  margin-right: 8px;
+}
+
+.chip-account {
+  font-size: 12px;
+}
+
+.chip-delete {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 18px;
+  margin-left: 8px;
+  cursor: pointer;
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: color 0.3s;
+}
+
+.chip-delete:hover {
+  color: #ff4d4d; /* Red color on hover */
+}
+

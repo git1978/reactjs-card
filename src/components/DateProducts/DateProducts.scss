@@ -1,0 +1,26 @@
+/* DateProducts.scss */
+
+/* Change the background color of the calendar */
+.react-datepicker__calendar {
+    background-color: #f0f0f0 !important;
+  }
+  
+  .react-datepicker__header {
+    background-color: #ffffff;
+  }
+  
+  .react-datepicker__day:hover {
+    background-color: #e0e0e0;
+  }
+  
+  /* Style for the input field and chips */
+  input[type="text"] {
+    cursor: pointer;
+    width: 100%;
+    padding: 8px;
+  }
+  
+  .badge {
+    margin-top: 10px;
+  }
+  
