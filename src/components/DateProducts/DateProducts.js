@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Form, Badge } from 'react-bootstrap';
 import DatePicker from "react-datepicker";
-import { format } from 'date-fns';  // Importing the format function from date-fns
 import "react-datepicker/dist/react-datepicker.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import './DateProducts.scss';  // For custom styles (if needed)
+import './DateProducts.scss'; // For custom styles (if needed)
 
 function DateProducts() {
   const [startDate, setStartDate] = useState(null);
@@ -17,10 +16,7 @@ function DateProducts() {
     setStartDate(start);
     setEndDate(end);
     if (start && end) {
-      // Format the selected dates to MM/DD/YYYY
-      const formattedStart = format(start, 'MM/dd/yyyy');
-      const formattedEnd = format(end, 'MM/dd/yyyy');
-      setSelectedRange(`${formattedStart} - ${formattedEnd}`);
+      setSelectedRange(`${start.toLocaleDateString()} - ${end.toLocaleDateString()}`);
       setShowDatePicker(false);  // Hide DatePicker after selecting a range
     }
   };
@@ -31,7 +27,6 @@ function DateProducts() {
   };
 
   return (
-    <Container>
       <Row>
         <Col md={6}>
           <Form.Group controlId="dateRange">
@@ -66,7 +61,6 @@ function DateProducts() {
           </Form.Group>
         </Col>
       </Row>
-    </Container>
   );
 }
 

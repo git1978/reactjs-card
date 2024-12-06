@@ -20,7 +20,7 @@ function AccountSelector() {
   };
 
   return (
-    <div className="container">
+    <div className="">
       <div className="mt-3">
         <label htmlFor="accountSelect">Choisir un compte :</label>
         <Select

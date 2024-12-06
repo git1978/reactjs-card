@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 const Filter = () => {
   const [filters, setFilters] = useState({
@@ -36,7 +34,7 @@ const Filter = () => {
 
   return (
     <>
-      <div className="container mt-4">
+      <div className="mt-4">
         <h3 className="mb-4">Filtres de Recherche</h3>
         <form onSubmit={handleSubmit}>
           {/* Première ligne : Types de documents */}

@@ -1,6 +1,8 @@
 import React from "react";
 import Navbar from "./components/Navbar";
 import Filter from "./components/Filter/Filter";
+import DragDropFileUpload from "./components/Dragdrop/DragDropFileUpload";
+import Copim from "./components/Copim/Copim";
 import AccountSelector from "./components/Account/AccountSelector";
 import DateProducts from "./components/DateProducts/DateProducts";
 import Home from "./pages/Home";
@@ -33,6 +35,15 @@ const App = () => {
         </>
       ),
     },
+    {
+      path: "/copim",
+      element: (
+        <>
+          <Navbar />
+          <Copim />
+        </>
+      ),
+    },
      {
       path: "/compte",
       element: (
@@ -40,6 +51,7 @@ const App = () => {
           <Navbar />
           <AccountSelector />
           <DateProducts />
+          <DragDropFileUpload />
         </>
       ),
       loader: productResolver, // Attach the productResolver to the Home route

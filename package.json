@@ -8,6 +8,7 @@
   "dependencies": {
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
+    "@fontsource/roboto": "^5.1.0",
     "@mui/icons-material": "^5.8.0",
     "@mui/material": "^5.8.0",
     "@mui/styles": "^5.8.0",
@@ -30,6 +31,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "build": "react-scripts build",
     "dev": "run-p dev:*",
     "dev:switch-site": "npm run switch-site",
     "dev:mock": "node /mocks/api/server.mjs",

@@ -1,6 +1,4 @@
 import Product from "../components/Product";
-//import { products } from "../data";
-
 import { useSelector } from 'react-redux';
 import { selectProducts } from '../redux/selectors/productSelector';
 
