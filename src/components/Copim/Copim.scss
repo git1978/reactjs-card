@@ -1,0 +1,159 @@
+/* Copim.scss */
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Ensures the container takes the full viewport height */
+    padding: 20px;
+  }
+  
+  .main-side {
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgb(214, 214, 214);
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .copim-icon-book {
+    display: flex;
+    justify-content: center; /* Center the image horizontally */
+    align-items: center; /* Center the image vertically */
+    margin-bottom: 20px; /* Add some space below the icon */
+    margin-top: -85px;
+  }
+  
+  .copim-title {
+    font-family: 'Roboto';
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 2.3;
+    color: #2d2926;
+  }
+  
+  .copim-sous-titre {
+    padding: 6px;
+    border-radius: 2px;
+    background-color: #518201;
+    color: white;
+    font-family: roboto;
+  }
+  
+  .copim-text-droit {
+    font-family: 'Roboto';
+    text-align: justify;
+    margin: 1rem;
+  }
+  
+  .copim-text-droit p {
+    margin-bottom: 10px;
+    font-size: 1rem;
+    line-height: 1.6;
+    font-family: sans-serif;
+    color: #333;
+  }
+  
+  .btn-upload {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    font-size: 1.1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .btn-upload:disabled {
+    background-color: #d6d6d6;
+    cursor: not-allowed;
+  }
+  
+  .drag-drop-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px dashed #007bff;
+    padding: 50px;
+    border-radius: 8px;
+    margin: 20px 0;
+  }
+  
+  .drag-drop-area p {
+    font-size: 1rem;
+    color: #333;
+    text-align: center;
+  }
+  
+  @media (max-width: 768px) {
+    .main-side {
+      padding: 10px;
+    }
+  
+    .copim-title {
+      font-size: 1.8rem;
+    }
+  
+    .copim-sous-titre {
+      font-size: 1.3rem;
+    }
+  
+    .form-check-label {
+      font-size: 0.9rem;
+    }
+  
+    .btn-upload {
+      font-size: 1rem;
+    }
+  }
+
+.copim-icon-book {
+    width: 140px;
+    height: 140px;
+    flex-grow: 0;
+    border-radius: 512px;
+    box-shadow: 0 4px 12px 0 rgba(0, 30, 20, 0.5);
+    border: solid 8px #fff;
+}
+
+.icon-list {
+    display: flex;
+    justify-content: space-between; /* Distribute items evenly */
+    gap: 20px; /* Add space between columns */
+    margin-top: 20px;
+  }
+  
+  .icon-list span {
+    display: flex;
+    flex-direction: column; /* Stack icon and text vertically */
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 48%; /* Ensure two items fit in a row */
+  }
+  
+  .icon-list .icon {
+    margin-bottom: 10px; /* Space between icon and text */
+  }
+  
+  @media (max-width: 768px) {
+    .icon-list {
+      flex-direction: column; /* Stack items vertically on small screens */
+      gap: 15px; /* Adjust space between items */
+    }
+  }
+
+
+  body {
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  

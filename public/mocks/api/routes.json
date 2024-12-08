@@ -1,0 +1,11 @@
+{
+    "/vidoc/v1/documents/search*": "/documents",
+    "/api/v1/details*": "/details$1",
+    "/api/v1/typedocs": "/typedocs",
+    "/api/v1/periodicities": "/periodes",
+    "/api/v1/accounts": "/accounts",
+    "/service-banking/v1/accounts-habilitations/search": "/accounts_habilitations",
+    "/vidoc/v1/documents": "/downloadRequest",
+    "/vidoc/v1/documents/:id/link": "/getLink"
+  }
+  

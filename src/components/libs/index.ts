@@ -1,3 +1,3 @@
 export { Input } from "./Input"
 export { Checkbox } from "./Checkbox"
-export { Button } from "./Button"
+export { iaButton } from "./iaButton"
