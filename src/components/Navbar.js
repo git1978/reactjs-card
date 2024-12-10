@@ -2,9 +2,20 @@ import React from "react";
 import { ShoppingBasket } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useTranslation } from 'react-i18next';
+import '../i18n'; 
+
 
 const Navbar = () => {
   const { cart } = useSelector((state) => state);
+  const { t, i18n } = useTranslation();
+
+
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);
+    localStorage.setItem('language', lng); // Sauvegarder la langue dans localStorage
+  };
+
   return (
     <>
       <nav className="flex items-center justify-between h-20  max-w-6xl mx-auto">
@@ -32,6 +43,20 @@ const Navbar = () => {
               )}
             </div>
           </Link>
+          <Link
+              onClick={() => changeLanguage('en')}
+              style={{ cursor: 'pointer', fontSize: '24px', marginRight: '10px' }}
+              title="English"
+            >
+              🇺🇸
+            </Link>
+            <Link
+              onClick={() => changeLanguage('fr')}
+              style={{ cursor: 'pointer', fontSize: '24px' }}
+              title="Français"
+            >
+              🇫🇷
+            </Link>
         </div>
       </nav>
     </>

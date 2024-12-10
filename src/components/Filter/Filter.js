@@ -4,21 +4,31 @@ import DatePicker from "react-datepicker";
 import './Filter.scss';
 import Select from 'react-select';
 import { useDispatch, useSelector } from "react-redux";
-import { selectAccounts, selectDevises, selectError, selectLoading } from '../../redux/selectors/documentSelector';
+import { selectAccounts, selectDevises } from '../../redux/selectors/documentSelector';
+import DocumentsList from "../tableDocuments/DocumentsList";
 import { submitFormService } from '../../redux/Slices/formSlice'; // Import the action from the renamed slice
+import { selectDocuments, selectLoading, selectError} from '../../redux/selectors/formSelectors';
+import Button from '../libs/iaButton';
+import { useTranslation } from 'react-i18next';
 
 const Filter = () => {
   const dispatch = useDispatch();
   const accounts = useSelector(selectAccounts); 
   const devises = useSelector(selectDevises); 
-  const loading = useSelector(selectLoading); 
-  const error = useSelector(selectError); 
+  const documents= useSelector(selectDocuments);
+  const loading = useSelector(selectLoading);
+  const error = useSelector(selectError);
+  
+
+  const { t } = useTranslation();
+
 
   const [documentType, setDocumentType] = useState("");
   const [dateRange, setDateRange] = useState([new Date(), new Date()]); // Default to today
   const [account, setAccount] = useState("");
   const [period, setPeriod] = useState("");
-  const [currency, setCurrency] = useState(""); // Currency state
+  const [currency, setCurrency] = useState("");
+  
 
   const documentTypes = [
     {
@@ -44,7 +54,6 @@ const Filter = () => {
       ],
     },
   ];
-
 
   const handleDeleteChip = (chipType) => {
     switch (chipType) {
@@ -114,8 +123,9 @@ const Filter = () => {
 
     // Dispatch the form submission action
     dispatch(submitFormService(formData));
+ 
   };
-
+  
   // Effect to reset the period if the document type is changed to 'facture'
   useEffect(() => {
     if (documentType === "facture") {
@@ -124,13 +134,15 @@ const Filter = () => {
   }, [documentType]);
 
   return (
-    <div className="container">
+    <div className="main">
+      <div class="filter">
+      <div class="main-liste">
       <form onSubmit={handleSubmit}>
         {/* Type de document */}
         <div className="row justify-content-center mb-3">
           <div className="col-12 col-md-6 text-center">
             <label htmlFor="documentType" className="form-label">
-              Type de Document
+            {t('filter.typedoc')}
             </label>
             <Select
               id="documentType"
@@ -153,7 +165,7 @@ const Filter = () => {
           {/* Date Range */}
           <div className="col-12 col-md-3">
             <label htmlFor="dateRangePicker" className="form-label">
-              Plage de Dates
+            {t('filter.plagedate')}
             </label>
             <DatePicker
               selected={dateRange[0]}
@@ -242,16 +254,6 @@ const Filter = () => {
 
         {/* Chips Bar */}
         <div id="chips" className="mt-4 p-2 d-flex flex-wrap align-items-center">
-          {documentType && (
-            <span className="badge bg-primary me-2 d-flex align-items-center">
-              Type: {documentType}
-              <FaTimes
-                onClick={() => handleDeleteChip("documentType")}
-                className="ms-2 cursor-pointer"
-                style={{ color: "white" }}
-              />
-            </span>
-          )}
           {dateRange[0] && dateRange[1] && (
             <span className="badge bg-success me-2 d-flex align-items-center">
               Dates: {formatDate(dateRange[0])} - {formatDate(dateRange[1])}
@@ -293,8 +295,20 @@ const Filter = () => {
             </span>
           )}
         </div>
-        <button type="submit" className="btn btn-primary">Submit</button>
-      </form>      
+        <Button 
+        event={handleSubmit} 
+        libelle={t('filter.searchbtn')}
+        className="btn btn-outline-success float-right filter-submit" 
+        type="submit"
+      />
+      </form> 
+      </div> 
+      </div>
+      {documents.length > 0 && 
+        <div class="sub-content">
+      <DocumentsList data={documents}  loading={loading}  error={error}  t={t} />
+      </div>
+      }
     </div>
   );
 };

@@ -1,19 +1,18 @@
-import React from "react";
+import React from 'react';
 
-export const iaButton = ({
-  loading,
-  type,
-  title,
-  onClick,
-  disabled
-}) => {
+const iaButton = ({ event, libelle, className, type, ...rest }) => {
+  const handleClick = event || (() => {});
+
   return (
     <button
-      className={loading ? "button is-small is-loading " : "button is-small " + type}
-      onClick={onClick}
-      disabled={disabled}
+      {...(className && { className })} // Ajoute className uniquement s'il existe
+      {...(type && { type })}          // Ajoute type uniquement s'il existe
+      onClick={handleClick}
+      {...rest} // Passe d'autres props éventuelles
     >
-      {title}
+      {libelle}
     </button>
   );
 };
+
+export default iaButton;

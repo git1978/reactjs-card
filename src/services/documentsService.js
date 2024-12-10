@@ -24,8 +24,10 @@ const documentService = {
   // Fetch Accounts from JSON file
   submitDocumentForm: async (formData) => {
     try {
-      const response = await axios.post(API_URL, formData);
-      return response.data;
+     // const response = await axios.post(API_URL, formData);
+     console.log(formData);
+     const response = await axios.get('/mocks/documents.json'); 
+     return response.data;
     } catch (error) {
       throw new Error(error.response ? error.response.data.message : error.message);
     }

@@ -1,6 +1,6 @@
 import React from "react";
 
-export const Input = ({
+const iaInput = ({
   name,
   value,
   inputChange,
@@ -38,3 +38,4 @@ export const Input = ({
     </>
   );
 };
+export default iaInput;

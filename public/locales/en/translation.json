@@ -1,0 +1,24 @@
+{
+  "welcome": "Bienvenue dans notre application !",
+  "login": {
+    "title": "Connexion",
+    "button": "Soumettre"
+  },
+  "filter": {
+    "typedoc": "Type de Document en",
+    "plagedate": "Date de publication en ",
+    "compte": "Compte",
+    "listecompte": "Liste des comptes",
+    "devise": "Devise de compte",
+    "type": "Type",
+    "filtredate": "Filtre de date en",
+    "libCompte": "libellé ou jumero de compte",
+    "periodicite": "Periodicité",
+    "fusioncompte": "Fusion de compte",
+    "selecttypecompte": "Selectionner le type de compte :",
+    "facture": "Facture",
+    "detail": "Détail",
+    "searchbtn":"search documents"
+  }
+  
+}

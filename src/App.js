@@ -76,6 +76,7 @@ const App = () => {
         horizontal: "left",
       }}
     >
+
       <RouterProvider router={router} /> {/* Use the router with the resolver */}
     </SnackbarProvider>
   );

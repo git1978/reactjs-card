@@ -1,54 +1,34 @@
-// src/redux/slices/formSlice.js
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import documentService from '../../services/documentsService';
 
-// Define initial state
+// Initial state
 const initialState = {
-  documentType: '',
-  dateRange: [new Date(), new Date()],
-  account: '',
-  period: '',
-  currency: '',
-  loading: false,
-  error: null,
-  success: false,
+  formData: null,      // Stores the submitted form data
+  documents: [],           // Stores the API response items
+  loading: false,      // Loading state
+  error: null,         // Error state
+  success: false,      // Success state
 };
 
 // Async thunk for form submission
 export const submitFormService = createAsyncThunk(
-  'form/submitFormService',
+  'documents/submitFormService',
   async (formData, { rejectWithValue }) => {
     try {
-      // Assuming you have an API to handle the form submission
-      const response = await axios.post('YOUR_API_URL', formData);
-      return response.data; // Return the data on success
+      const response = await documentService.submitDocumentForm(formData);
+      return response; // Return the full response (e.g., items)
     } catch (error) {
-      return rejectWithValue(error.response ? error.response.data : error.message);
+      return rejectWithValue(error.message); // Return the error message
     }
   }
 );
 
-// Create slice
-const formSlice = createSlice({
-  name: 'form',
+// Slice definition
+const documentSlice = createSlice({
+  name: 'documents',
   initialState,
   reducers: {
-    setDocumentType(state, action) {
-      state.documentType = action.payload;
-    },
-    setDateRange(state, action) {
-      state.dateRange = action.payload;
-    },
-    setAccount(state, action) {
-      state.account = action.payload;
-    },
-    setPeriod(state, action) {
-      state.period = action.payload;
-    },
-    setCurrency(state, action) {
-      state.currency = action.payload;
-    },
-    resetForm(state) {
+    resetState(state) {
       Object.assign(state, initialState);
     },
   },
@@ -57,19 +37,21 @@ const formSlice = createSlice({
       .addCase(submitFormService.pending, (state) => {
         state.loading = true;
         state.error = null;
+        state.success = false;
       })
       .addCase(submitFormService.fulfilled, (state, action) => {
         state.loading = false;
         state.success = true;
-        // Handle the response data if needed
+        state.documents = action.payload.documents_rech.data; // Save items from the API response
+        state.formData = action.meta.arg;        // Save the submitted form data
       })
       .addCase(submitFormService.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload || 'An error occurred during submission';
+        state.error = action.payload || 'An error occurred';
+        state.success = false;
       });
   },
 });
-
-export const { setDocumentType, setDateRange, setAccount, setPeriod, setCurrency, resetForm } = formSlice.actions;
-
-export default formSlice.reducer;
+// Export actions and reducer
+export const { resetState } = documentSlice.actions;
+export default documentSlice.reducer;
