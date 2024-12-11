@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useTranslation } from 'react-i18next'; // Import the hook
 import PeriodPipe from '../../pipes/periode.pipe';
-
+import Tag from '../libs/TagType';
+import './DocumentsList.scss';
 const DocumentsList = ({ data, loading, error }) => {
   const { t, i18n } = useTranslation(); // Initialize the translation hook
   const [selectedDocs, setSelectedDocs] = useState([]);
@@ -51,8 +52,9 @@ const DocumentsList = ({ data, loading, error }) => {
             <th>Compte</th>
             <th>Période</th>
             <th>Devise</th>
-            <th>Actions</th> {/* Added Actions column */}
-            <th>Détail</th>
+            <th>Type</th> {/* Added Type column header */}
+            <th>Actions</th> {/* Actions column */}
+            <th style={{ width: '5%' }}>Détail</th>
           </tr>
         </thead>
         <tbody>
@@ -68,11 +70,22 @@ const DocumentsList = ({ data, loading, error }) => {
                     />
                   </td>
                   <td>{doc.firstConsultationDate}</td>
-                  <td>{doc.label}{doc.contractNumber}</td>
+                  <td><span class="d-flex">{doc.label}</span>{doc.contractNumber}</td>
                   <td><PeriodPipe periodCode={doc.documentPeriodicity} /></td>
                   <td>{doc.devise}</td>
                   <td>
-                    {/* Action icons with aligned styling */}
+                  <Tag type="default" color="#008565">Primary Tag</Tag>
+                    {/*
+
+                   <Tag type="default" color="#008565">Primary Tag</Tag>
+                      <Tag type="default" color="#4b2fb6">Primary Tag</Tag>
+                      <Tag type="default" color="#972e0d">Primary Tag</Tag>
+                      <Tag type="default" color="#007cb1">Primary Tag</Tag>
+
+                  */}   
+
+                    </td> {/* Added Type column data */}
+                  <td>
                     <div style={{ display: 'flex', alignItems: 'center' }}>
                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-eye" viewBox="0 0 16 16" style={{ fill: '#aea7a7', height: '20px', width: '20px', cursor: 'pointer', marginRight: '15px' }}>
                         <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zm-8 4a4 4 0 1 1 0-8 4 4 0 0 1 0 8z" />
@@ -84,23 +97,20 @@ const DocumentsList = ({ data, loading, error }) => {
                       </svg>
                     </div>
                   </td>
-                  <td>
-                    {/* Chevron icon to toggle details */}
+                  <td style={{ textAlign: 'center', width: '5%' }}>
+                    {/* Chevron icon */}
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-chevron-down" viewBox="0 0 16 16" style={{ fill: '#aea7a7', height: '20px', width: '20px', cursor: 'pointer' }} onClick={() => toggleDetails(doc.id)}>
                       <path fillRule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
                     </svg>
                   </td>
-                </tr>
 
-                {/* Render row details only if expanded */}
+                </tr>
                 {expandedDoc === doc.id && (
                   <tr>
-                    <td colSpan="7">
+                    <td colSpan="8">
                       <div className="row-details">
-                        {/* Add your detailed information here */}
                         <p><strong>Document Detail:</strong></p>
                         <p>{t('document.details')} for {doc.label} ({doc.contractNumber})</p>
-                        {/* For example, you can add additional document info */}
                         <p><strong>Additional Info:</strong> {doc.additionalInfo || 'No additional info available.'}</p>
                       </div>
                     </td>
@@ -110,7 +120,7 @@ const DocumentsList = ({ data, loading, error }) => {
             ))
           ) : (
             <tr>
-              <td colSpan="7" style={{ textAlign: "center" }}>{t('filter.noDocuments')}</td>
+              <td colSpan="8" style={{ textAlign: "center" }}>{t('filter.noDocuments')}</td>
             </tr>
           )}
         </tbody>
