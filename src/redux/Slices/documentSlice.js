@@ -1,23 +1,38 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import documentService from '../../services/documentsService'; // Assuming your documentService is in the same directory
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import documentService from "../../services/documentsService"; // Assuming your documentService is in the same directory
 
 // Async thunks for fetching devises and accounts
-export const fetchDevises = createAsyncThunk('documents/fetchDevises', async () => {
-  const response = await documentService.fetchDevises();
-  return response;
-});
+export const fetchDevises = createAsyncThunk(
+  "documents/fetchDevises",
+  async () => {
+    const response = await documentService.fetchDevises();
+    return response;
+  }
+);
 
-export const fetchAccounts = createAsyncThunk('documents/fetchAccounts', async () => {
-  const response = await documentService.fetchAccounts();
-  return response;
-});
+export const fetchAccounts = createAsyncThunk(
+  "documents/fetchAccounts",
+  async () => {
+    const response = await documentService.fetchAccounts();
+    return response;
+  }
+);
+
+export const fetchDocumentTypes = createAsyncThunk(
+  "documentTypes/fetchDocumentTypes",
+  async () => {
+    const response = await documentService.fetchDocumentTypes();
+    return response;
+  }
+);
 
 // Slice to manage document state
 const documentSlice = createSlice({
-  name: 'documents',
+  name: "documents",
   initialState: {
     devises: [],
     accounts: [],
+    documentTypes: [],
     loading: false,
     error: null,
   },
@@ -47,6 +62,18 @@ const documentSlice = createSlice({
       .addCase(fetchAccounts.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
+      })
+      .addCase(fetchDocumentTypes.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchDocumentTypes.fulfilled, (state, action) => {
+        state.loading = false;
+        state.documentTypes = action.payload;
+      })
+      .addCase(fetchDocumentTypes.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
       });
   },
 });

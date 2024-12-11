@@ -8,14 +8,16 @@ const iaModal = ({ isOpen, onClose, children }) => {
   return (
     <div className="modal-overlay">
       <div className="modal-content">
-        <button className="close-btn" onClick={onClose}>X</button>
+        <button className="close-btn" onClick={onClose}>
+          X
+        </button>
         {children}
       </div>
     </div>
   );
 };
 
-Modal.propTypes = {
+iaModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired,

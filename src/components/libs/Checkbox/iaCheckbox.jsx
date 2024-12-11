@@ -14,13 +14,13 @@ const iaCheckbox = ({ checked, onChange, label }) => {
   );
 };
 
-Checkbox.propTypes = {
+iaCheckbox.propTypes = {
   checked: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
   label: PropTypes.string.isRequired,
 };
 
-Checkbox.defaultProps = {
+iaCheckbox.defaultProps = {
   checked: false,
 };
 
