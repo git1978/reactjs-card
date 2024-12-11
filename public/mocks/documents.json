@@ -30,7 +30,7 @@
         "devise": "EUR",
         "iup": "03320000086300000",
         "viewed": true,
-        "bankStatementType": "P"
+        "bankStatementType": "M"
       },
       {
         "documentId": "ZZ1F8BEU01I6E4L0O",
@@ -61,7 +61,7 @@
         "devise": "EUR",
         "iup": "03320000086300000",
         "viewed": true,
-        "bankStatementType": "P"
+        "bankStatementType": "N"
       },
       {
         "documentId": "ZZ1F8BEU01I6E4L0O",
@@ -92,7 +92,7 @@
         "devise": "EUR",
         "iup": "03320000086300000",
         "viewed": true,
-        "bankStatementType": "P"
+        "bankStatementType": "M"
       },
       {
         "documentId": "ZZ1F8BEU01I6E4L0O",
@@ -123,7 +123,7 @@
         "devise": "EUR",
         "iup": "03320000086300000",
         "viewed": true,
-        "bankStatementType": "P"
+        "bankStatementType": "Q"
       },
       {
         "documentId": "ZZ1F8BEU01I6E4L0O",
@@ -154,7 +154,7 @@
         "devise": "EUR",
         "iup": "03320000086300000",
         "viewed": true,
-        "bankStatementType": "P"
+        "bankStatementType": "Q"
       },
       {
         "documentId": "ZZ1F8BEU01I6E4L0O",
@@ -185,7 +185,7 @@
         "devise": "EUR",
         "iup": "03320000086300000",
         "viewed": true,
-        "bankStatementType": "P"
+        "bankStatementType": "M"
       },
       {
         "documentId": "ZZ1FXUHFJS90RTNSH",
@@ -278,7 +278,7 @@
         "devise": "EUR",
         "iup": "03320000086300000",
         "viewed": false,
-        "bankStatementType": "F"
+        "bankStatementType": "N"
       },
       {
         "documentId": "ZZ1FXUHFJS90RTNSH",
@@ -402,7 +402,7 @@
         "devise": "EUR",
         "iup": "03320000086300000",
         "viewed": false,
-        "bankStatementType": "F"
+        "bankStatementType": "M"
       },
       {
         "documentId": "ZZ1FXUHFJS90RTNSH",
@@ -433,7 +433,7 @@
         "devise": "EUR",
         "iup": "03320000086300000",
         "viewed": false,
-        "bankStatementType": "F"
+        "bankStatementType": "N"
       },
       {
         "documentId": "ZZ1FXUHFJS90RTNSH",
@@ -464,7 +464,7 @@
         "devise": "EUR",
         "iup": "03320000086300000",
         "viewed": false,
-        "bankStatementType": "F"
+        "bankStatementType": "N"
       }
     ]
   },
@@ -481,4 +481,3 @@
     "observation": ["string"]
   }
 }
- 

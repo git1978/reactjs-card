@@ -1,41 +1,74 @@
 import React, { useState } from "react";
-import { useTranslation } from "react-i18next"; // Import the hook
+import { useTranslation } from "react-i18next";
 import PeriodPipe from "../../pipes/periode.pipe";
 import Tag from "../libs/Tags/TagType";
 import "./DocumentsList.scss";
-const DocumentsList = ({ data, loading, error }) => {
-  const { t } = useTranslation(); // Initialize the translation hook
-  const [selectedDocs, setSelectedDocs] = useState([]);
-  const [expandedDoc, setExpandedDoc] = useState(null); // State to track the expanded row
+import Modal from "../libs/Modal/iaModal";
 
-  // Function to handle checkbox state changes
+const DocumentsList = ({ data, loading, error }) => {
+  const { t } = useTranslation();
+  const [selectedDocs, setSelectedDocs] = useState([]);
+  const [expandedDoc, setExpandedDoc] = useState(null);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedDoc, setSelectedDoc] = useState(null);
+
   const handleCheckboxChange = (docId) => {
-    setSelectedDocs((prevSelectedDocs) => {
-      if (prevSelectedDocs.includes(docId)) {
-        return prevSelectedDocs.filter((id) => id !== docId); // Deselect
-      } else {
-        return [...prevSelectedDocs, docId]; // Select
-      }
-    });
+    setSelectedDocs((prevSelectedDocs) =>
+      prevSelectedDocs.includes(docId)
+        ? prevSelectedDocs.filter((id) => id !== docId)
+        : [...prevSelectedDocs, docId]
+    );
   };
 
-  // Function to handle chevron click and toggle details
   const toggleDetails = (docId) => {
     setExpandedDoc((prevExpandedDoc) =>
       prevExpandedDoc === docId ? null : docId
-    ); // Toggle visibility of details
+    );
+  };
+
+  const openModal = (doc) => {
+    setSelectedDoc(doc);
+    setModalOpen(true);
+  };
+
+  const getTagColor = (bankStatementType) => {
+    switch (bankStatementType) {
+      case "F":
+        return "#008565";
+      case "Q":
+        return "#4b2fb6";
+      case "M":
+        return "#972e0d";
+      case "N":
+        return "#007cb1";
+      default:
+        return "#cccccc"; // Default color if no match
+    }
+  };
+
+  const getTagLabel = (bankStatementType) => {
+    switch (bankStatementType) {
+      case "F":
+        return "F Type Tag";
+      case "Q":
+        return "Q Type Tag";
+      case "M":
+        return "M Type Tag";
+      case "N":
+        return "N Type Tag";
+      default:
+        return "Unknown Type";
+    }
   };
 
   return (
     <div className="table-list">
-      {/* Show loading spinner */}
       {loading && (
         <p>
           Chargement... <span className="spinner"></span>
         </p>
       )}
 
-      {/* Show error message */}
       {error && (
         <p style={{ color: "red", padding: "10px", marginBottom: "15px" }}>
           {error}
@@ -50,9 +83,9 @@ const DocumentsList = ({ data, loading, error }) => {
                 type="checkbox"
                 onChange={(e) => {
                   if (e.target.checked) {
-                    setSelectedDocs(data.map((doc) => doc.id)); // Select all
+                    setSelectedDocs(data.map((doc) => doc.id));
                   } else {
-                    setSelectedDocs([]); // Deselect all
+                    setSelectedDocs([]);
                   }
                 }}
                 checked={selectedDocs.length === data.length}
@@ -62,8 +95,8 @@ const DocumentsList = ({ data, loading, error }) => {
             <th>Compte</th>
             <th>Période</th>
             <th>Devise</th>
-            <th>Type</th> {/* Added Type column header */}
-            <th>Actions</th> {/* Actions column */}
+            <th>Type</th>
+            <th>Actions</th>
             <th style={{ width: "5%" }}>Détail</th>
           </tr>
         </thead>
@@ -79,7 +112,12 @@ const DocumentsList = ({ data, loading, error }) => {
                       onChange={() => handleCheckboxChange(doc.id)}
                     />
                   </td>
-                  <td>{doc.firstConsultationDate}</td>
+                  <td
+                    onClick={() => openModal(doc)}
+                    style={{ cursor: "pointer", color: "#007bff" }}
+                  >
+                    {doc.firstConsultationDate}
+                  </td>
                   <td>
                     <span className="d-flex">{doc.label}</span>
                     {doc.contractNumber}
@@ -89,19 +127,13 @@ const DocumentsList = ({ data, loading, error }) => {
                   </td>
                   <td>{doc.devise}</td>
                   <td>
-                    <Tag type="default" color="#008565">
-                      Primary Tag
+                    <Tag
+                      type="default"
+                      color={getTagColor(doc.bankStatementType)}
+                    >
+                      {getTagLabel(doc.bankStatementType)}
                     </Tag>
-                    {/*
-
-                   <Tag type="default" color="#008565">Primary Tag</Tag>
-                      <Tag type="default" color="#4b2fb6">Primary Tag</Tag>
-                      <Tag type="default" color="#972e0d">Primary Tag</Tag>
-                      <Tag type="default" color="#007cb1">Primary Tag</Tag>
-
-                  */}
-                  </td>{" "}
-                  {/* Added Type column data */}
+                  </td>
                   <td>
                     <div style={{ display: "flex", alignItems: "center" }}>
                       <svg
@@ -145,7 +177,6 @@ const DocumentsList = ({ data, loading, error }) => {
                     </div>
                   </td>
                   <td style={{ textAlign: "center", width: "5%" }}>
-                    {/* Chevron icon */}
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
@@ -199,6 +230,15 @@ const DocumentsList = ({ data, loading, error }) => {
           )}
         </tbody>
       </table>
+
+      {/* iaModal */}
+      {modalOpen && selectedDoc && (
+        <Modal
+          open={modalOpen}
+          onClose={() => setModalOpen(false)}
+          document={selectedDoc}
+        />
+      )}
     </div>
   );
 };
