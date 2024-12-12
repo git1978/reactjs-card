@@ -1,8 +1,8 @@
 import React from "react";
 import Navbar from "./components/Navbar";
-import Filter from "./components/Filter/Filter";
 import Copim from "./components/Copim/Copim";
 import Home from "./pages/Home";
+import "./App.scss";
 import Cart from "./pages/Cart";
 import { SnackbarProvider } from "notistack";
 import { Slide } from "@mui/material";
@@ -11,6 +11,10 @@ import { productResolver } from "./resolver/productResolver";
 import { documentResolver } from "./resolver/documentResolver";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-datepicker/dist/react-datepicker.css";
+import MbeHeader from "./components/Header/Header";
+import MbeMenu from "./components/Menu/Menu";
+import MbeContainsMain from "./components/MainContains/MainContent";
+import MbeFooter from "./components/Footer/Footer";
 
 const App = () => {
   // Define routes with loaders
@@ -19,8 +23,19 @@ const App = () => {
       path: "/",
       element: (
         <>
-          <Navbar />
-          <Home />
+          <div className="app-container">
+            <MbeHeader />
+            <div className="d-flex flex-column">
+              <div className="d-flex">
+                <MbeMenu />
+                <div className="main-content p-4">
+                  <Navbar />
+                  <Home />
+                </div>
+              </div>
+              <MbeFooter />
+            </div>
+          </div>
         </>
       ),
       loader: productResolver, // Attach the productResolver to the Home route
@@ -29,8 +44,18 @@ const App = () => {
       path: "/cart",
       element: (
         <>
-          <Navbar />
-          <Cart />
+          <div className="app-container">
+            <MbeHeader />
+            <div className="d-flex flex-column">
+              <div className="d-flex">
+                <MbeMenu />
+                <div className="main-content p-4">
+                  <Cart />
+                </div>
+              </div>
+              <MbeFooter />
+            </div>
+          </div>
         </>
       ),
     },
@@ -38,8 +63,16 @@ const App = () => {
       path: "/filter",
       element: (
         <>
-          <Navbar />
-          <Filter />
+          <div className="app-container">
+            <MbeHeader />
+            <div className="d-flex flex-column">
+              <div className="d-flex">
+                <MbeMenu />
+                <MbeContainsMain />
+              </div>
+              <MbeFooter />
+            </div>
+          </div>
         </>
       ),
       loader: documentResolver, // Attach the documentResolver to the Home route
@@ -48,8 +81,18 @@ const App = () => {
       path: "/copim",
       element: (
         <>
-          <Navbar />
-          <Copim />
+          <div className="app-container">
+            <MbeHeader />
+            <div className="d-flex flex-column">
+              <div className="d-flex">
+                <MbeMenu />
+                <div className="main-content p-4">
+                  <Copim />
+                </div>
+              </div>
+              <MbeFooter />
+            </div>
+          </div>
         </>
       ),
     },
