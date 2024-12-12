@@ -24,6 +24,8 @@
  .table-list {
     font-family: 'Roboto', sans-serif; /* Use 'sans-serif' as a fallback */
     font-size: 14px;
+    margin-top: 22px;
+    box-shadow: 0 4px 8px rgb(214, 214, 214);
 }
 
 .table-list th,
@@ -32,6 +34,7 @@
   text-align: center;
   vertical-align: middle; /* Pour centrer aussi verticalement */
 }
+
 .table-list .d-flex {
   display: flex;
   justify-content: center; /* Centre horizontalement */
@@ -42,4 +45,25 @@
 .table-list td svg {
   display: block;          /* Supprime les marges automatiques indésirables */
   margin: 0 auto;          /* Centre horizontalement */
+}
+
+div#documentType {
+  font-family: "Roboto";
+  font-size: 12px;
+  width: 350px;
+  color: black;
+}
+
+select#periodList, div#currencyList,
+div#accountList, select#currencyList {
+    font-family: "Roboto";
+    font-size: 12px;
+    width: 350px;
+    color: black;
+}
+.rangeDate {
+  font-family: "Roboto";
+  font-size: 12px;
+  width: 250px;
+  color: black;
 }

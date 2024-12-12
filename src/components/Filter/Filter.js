@@ -113,13 +113,25 @@ const Filter = () => {
 
   return (
     <div className="main">
+      <nav id="navbreadcrumb" aria-label="breadcrumb">
+        <ol className="breadcrumb">
+          <li className="breadcrumb-item">
+            <a href="/">Accueil</a>
+          </li>
+          <li className="breadcrumb-item active" aria-current="page">
+            <span>Relevés &amp; factures</span>
+          </li>
+        </ol>
+      </nav>
+      <h1 className="h1 title-edoc mt-3">E-Documents</h1>
       <div className="filter">
         <div className="main-liste">
           <form onSubmit={handleSubmit}>
-            {/* Type de document */}
+            {/* Type de document and Date Range on the same line */}
             <div className="row justify-content-center mb-3">
-              <div className="col-12 col-md-6 text-center">
-                <label htmlFor="documentType" className="form-label">
+              {/* Type de document */}
+              <div className="col-12 col-md-6 d-flex align-items-center">
+                <label htmlFor="documentType" className="doctype me-2">
                   {t("filter.typedoc")}
                 </label>
                 <Select
@@ -138,13 +150,10 @@ const Filter = () => {
                   className="react-select-container"
                 />
               </div>
-            </div>
 
-            {/* Date Range Picker, Liste des Comptes, Période et Liste des Devises */}
-            <div className="row justify-content-center mb-3">
               {/* Date Range */}
-              <div className="col-12 col-md-3">
-                <label htmlFor="dateRangePicker" className="form-label">
+              <div className="col-12 col-md-6">
+                <label htmlFor="dateRangePicker" className="sub-filtre">
                   {t("filter.plagedate")}
                 </label>
                 <DatePicker
@@ -153,16 +162,19 @@ const Filter = () => {
                   startDate={dateRange[0]}
                   endDate={dateRange[1]}
                   selectsRange
-                  className="form-control"
+                  className="form-control rangeDate"
                   placeholderText="Sélectionnez une plage de dates"
                   dateFormat="MM/dd/yyyy" // Changed date format to MM/dd/yyyy
                   locale="fr"
                 />
               </div>
+            </div>
 
+            {/* Second row: Liste des Comptes, Liste des Devises and Période */}
+            <div className="row justify-content-center mb-3">
               {/* Liste des Comptes */}
-              <div className="col-12 col-md-3">
-                <label htmlFor="accountList" className="form-label">
+              <div className="col-12 col-md-4">
+                <label htmlFor="accountList" className="sub-filtre">
                   Liste des Comptes
                 </label>
                 {loading ? (
@@ -182,8 +194,8 @@ const Filter = () => {
               </div>
 
               {/* Liste des Devises (Currency List) */}
-              <div className="col-12 col-md-3">
-                <label htmlFor="currencyList" className="form-label">
+              <div className="col-12 col-md-4">
+                <label htmlFor="currencyList" className="sub-filtre">
                   Liste des Devises
                 </label>
                 {loading ? (
@@ -210,8 +222,8 @@ const Filter = () => {
 
               {/* Période conditionnelle */}
               {documentType !== "facture" && (
-                <div className="col-12 col-md-3">
-                  <label htmlFor="periodList" className="form-label">
+                <div className="col-12 col-md-4">
+                  <label htmlFor="periodList" className="sub-filtre">
                     Période
                   </label>
                   <select
@@ -239,7 +251,7 @@ const Filter = () => {
               className="mt-4 p-2 d-flex flex-wrap align-items-center"
             >
               {dateRange[0] && dateRange[1] && (
-                <span className="badge bg-success me-2 d-flex align-items-center">
+                <span className="badge bg-date me-2 d-flex align-items-center">
                   Dates: {formatDate(dateRange[0])} - {formatDate(dateRange[1])}
                   <FaTimes
                     onClick={() => handleDeleteChip("dateRange")}

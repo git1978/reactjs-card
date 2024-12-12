@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom"; // Ensure you're using React Router for Link
 import "../Header/Header.scss";
 import { useTranslation } from "react-i18next";
 
@@ -29,37 +28,42 @@ const Header = () => {
         </a>
 
         {/* Language selection */}
-        <div className="language-selection">
-          <Link
+        <div className="flex list-none items-center space-x-6 mr-5">
+          <a
             onClick={() => changeLanguage("en")}
-            style={{ cursor: "pointer", fontSize: "24px", marginRight: "10px" }}
+            style={{
+              cursor: "pointer",
+              color: "#009562",
+              fontFamily: "Roboto",
+            }}
             title="English"
           >
-            🇺🇸
-          </Link>
-          <Link
+            en
+          </a>
+          <a
             onClick={() => changeLanguage("fr")}
-            style={{ cursor: "pointer", fontSize: "24px" }}
+            style={{
+              cursor: "pointer",
+              color: "#009562",
+              fontFamily: "Roboto",
+            }}
             title="Français"
           >
-            🇫🇷
-          </Link>
-        </div>
-
-        {/* Logout button */}
-        <div className="logout">
-          <Link
-            to="/logout" // Assuming you handle logout route in your application
-            style={{
-              color: "red",
-              fontSize: "24px",
-              cursor: "pointer",
-              marginLeft: "20px",
-            }}
-            title="Deconnexion"
-          >
-            🔓
-          </Link>
+            fr
+          </a>
+          {/* Logout button */}
+          <div className="logout">
+            <a
+              to="/logout" // Assuming you handle logout route in your application
+            >
+              <img
+                title="Deconnexion"
+                src="/images/deconnexion.png"
+                className="d-inline-block align-top logout-icon"
+                alt="Deconnexion"
+              />
+            </a>
+          </div>
         </div>
       </nav>
     </div>
