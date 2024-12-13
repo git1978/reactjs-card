@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { FaTimes } from "react-icons/fa";
+import { FaTimes, FaSearch } from "react-icons/fa";
+
 import DatePicker from "react-datepicker";
 import "./Filter.scss";
 import Select from "react-select";
@@ -35,6 +36,7 @@ const Filter = () => {
   const [account, setAccount] = useState("");
   const [period, setPeriod] = useState("");
   const [currency, setCurrency] = useState("");
+  const [facture, setFacture] = useState("");
 
   const handleDeleteChip = (chipType) => {
     switch (chipType) {
@@ -52,6 +54,9 @@ const Filter = () => {
         break;
       case "currency":
         setCurrency(""); // Reset currency
+        break;
+      case "facture":
+        setFacture(""); // Reset currency
         break;
       default:
         break;
@@ -98,6 +103,7 @@ const Filter = () => {
       account,
       period,
       currency,
+      facture,
     };
 
     // Dispatch the form submission action
@@ -106,8 +112,20 @@ const Filter = () => {
 
   // Effect to reset the period if the document type is changed to 'facture'
   useEffect(() => {
-    if (documentType === "facture") {
+    if (documentType === "fct") {
       setPeriod(""); // Reset the period if the document type is 'facture'
+      setFacture(""); // Clear facture
+      setCurrency("");
+    }
+
+    if (
+      documentType !== "fct" &&
+      documentType !== "rlv-com-cf" &&
+      documentType !== "rlv-vi"
+    ) {
+      setPeriod(""); // Reset the period if the document type is 'facture'
+      setFacture(""); // Clear facture
+      setCurrency("");
     }
   }, [documentType]);
 
@@ -127,53 +145,9 @@ const Filter = () => {
       <div className="filter">
         <div className="main-liste">
           <form onSubmit={handleSubmit}>
-            {/* Type de document and Date Range on the same line */}
-            <div className="row justify-content-center mb-3">
-              {/* Type de document */}
+            {/* First Row: Liste des Comptes */}
+            <div className="row justify-content-start mb-3">
               <div className="col-12 col-md-6 d-flex align-items-center">
-                <label htmlFor="documentType" className="doctype me-2">
-                  {t("filter.typedoc")}
-                </label>
-                <Select
-                  id="documentType"
-                  value={
-                    documentTypes
-                      .flatMap((category) => category.options)
-                      .find((option) => option.value === documentType) || null
-                  }
-                  onChange={handleSelectChange}
-                  options={documentTypes}
-                  getOptionLabel={(e) => e.label}
-                  getOptionValue={(e) => e.value}
-                  placeholder="Choisir un type..."
-                  isSearchable={true} // Enables searching
-                  className="react-select-container"
-                />
-              </div>
-
-              {/* Date Range */}
-              <div className="col-12 col-md-6">
-                <label htmlFor="dateRangePicker" className="sub-filtre">
-                  {t("filter.plagedate")}
-                </label>
-                <DatePicker
-                  selected={dateRange[0]}
-                  onChange={(dates) => setDateRange(dates)}
-                  startDate={dateRange[0]}
-                  endDate={dateRange[1]}
-                  selectsRange
-                  className="form-control rangeDate"
-                  placeholderText="Sélectionnez une plage de dates"
-                  dateFormat="MM/dd/yyyy" // Changed date format to MM/dd/yyyy
-                  locale="fr"
-                />
-              </div>
-            </div>
-
-            {/* Second row: Liste des Comptes, Liste des Devises and Période */}
-            <div className="row justify-content-center mb-3">
-              {/* Liste des Comptes */}
-              <div className="col-12 col-md-4">
                 <label htmlFor="accountList" className="sub-filtre">
                   Liste des Comptes
                 </label>
@@ -192,55 +166,130 @@ const Filter = () => {
                   />
                 )}
               </div>
+            </div>
 
-              {/* Liste des Devises (Currency List) */}
-              <div className="col-12 col-md-4">
-                <label htmlFor="currencyList" className="sub-filtre">
-                  Liste des Devises
+            {/* Second Row: Type de Document and Date Range on the same line */}
+            <div className="row justify-content-start mb-3">
+              <div className="col-12 col-md-6 d-flex align-items-center">
+                <label htmlFor="documentType" className="sub-filtre">
+                  {t("filter.typedoc")}
                 </label>
-                {loading ? (
-                  <p>Chargement des devises...</p>
-                ) : error ? (
-                  <p className="text-danger">{error}</p>
-                ) : (
-                  <select
-                    id="currencyList"
-                    className="form-select"
-                    value={currency}
-                    onChange={(e) => setCurrency(e.target.value)}
-                  >
-                    <option value="">Choisir une devise...</option>
-                    {devises &&
-                      devises.map((devise, index) => (
-                        <option key={index} value={devise.currency}>
-                          {devise.currency} - {devise.country}
-                        </option>
-                      ))}
-                  </select>
-                )}
+                <Select
+                  id="documentType"
+                  value={
+                    documentTypes
+                      .flatMap((category) => category.options)
+                      .find((option) => option.value === documentType) || null
+                  }
+                  onChange={handleSelectChange}
+                  options={documentTypes}
+                  getOptionLabel={(e) => e.label}
+                  getOptionValue={(e) => e.value}
+                  placeholder="Choisir un type..."
+                  isSearchable={true}
+                  className="react-select-container"
+                />
+              </div>
+            </div>
+
+            <div className="row justify-content-start mb-3">
+              {/* Date Range Picker in the first column */}
+              <div className="col-12 col-md-4">
+                <label htmlFor="dateRangePicker" className="sub-filtre">
+                  {t("filter.plagedate")}
+                </label>
+                <DatePicker
+                  selected={dateRange[0]}
+                  onChange={(dates) => setDateRange(dates)}
+                  startDate={dateRange[0]}
+                  endDate={dateRange[1]}
+                  selectsRange
+                  className="form-control rangeDate"
+                  placeholderText="Sélectionnez une plage de dates"
+                  dateFormat="MM/dd/yyyy"
+                  locale="fr"
+                />
               </div>
 
-              {/* Période conditionnelle */}
-              {documentType !== "facture" && (
+              {/* Liste des Devises */}
+              {(documentType === "fct" ||
+                documentType === "rlv-com-cf" ||
+                documentType === "rlv-vi") && (
                 <div className="col-12 col-md-4">
-                  <label htmlFor="periodList" className="sub-filtre">
-                    Période
+                  <label htmlFor="currencyList" className="sub-filtre">
+                    Liste des Devises
                   </label>
-                  <select
-                    id="periodList"
-                    className="form-select"
-                    value={period}
-                    onChange={(e) => setPeriod(e.target.value)}
-                  >
-                    <option value="">Choisir une période...</option>
-                    <option value="QUOTIDIEN">QUOTIDIEN</option>
-                    <option value="HEBDOMADAIRE">HEBDOMADAIRE</option>
-                    <option value="MENSUEL">MENSUEL</option>
-                    <option value="BIMENSUEL">BIMENSUEL</option>
-                    <option value="TRIMESTRIEL">TRIMESTRIEL</option>
-                    <option value="SEMESTRIEL">SEMESTRIEL</option>
-                    <option value="ANNUEL">ANNUEL</option>
-                  </select>
+                  {loading ? (
+                    <p>Chargement des devises...</p>
+                  ) : error ? (
+                    <p className="text-danger">{error}</p>
+                  ) : (
+                    <select
+                      id="currencyList"
+                      className="form-select"
+                      value={currency}
+                      onChange={(e) => setCurrency(e.target.value)}
+                    >
+                      <option value="">Choisir une devise...</option>
+                      {devises &&
+                        devises.map((devise, index) => (
+                          <option key={index} value={devise.currency}>
+                            {devise.currency} - {devise.country}
+                          </option>
+                        ))}
+                    </select>
+                  )}
+                </div>
+              )}
+
+              {/* Liste des Devises */}
+              {documentType !== "fct" &&
+                documentType !== "rlv-com-cf" &&
+                documentType !== "rlv-vi" && (
+                  <div className="col-12 col-md-4">
+                    <label htmlFor="periodList" className="sub-filtre">
+                      Période
+                    </label>
+                    {loading ? (
+                      <p>Chargement des devises...</p>
+                    ) : error ? (
+                      <p className="text-danger">{error}</p>
+                    ) : (
+                      <select
+                        id="periodList"
+                        className="form-select"
+                        value={period}
+                        onChange={(e) => setPeriod(e.target.value)}
+                      >
+                        <option value="">Choisir une période...</option>
+                        <option value="QUOTIDIEN">QUOTIDIEN</option>
+                        <option value="HEBDOMADAIRE">HEBDOMADAIRE</option>
+                        <option value="MENSUEL">MENSUEL</option>
+                        <option value="BIMENSUEL">BIMENSUEL</option>
+                        <option value="TRIMESTRIEL">TRIMESTRIEL</option>
+                        <option value="SEMESTRIEL">SEMESTRIEL</option>
+                        <option value="ANNUEL">ANNUEL</option>
+                      </select>
+                    )}
+                  </div>
+                )}
+
+              {/* Numéro de Facture */}
+              {(documentType === "fct" ||
+                documentType === "rlv-com-cf" ||
+                documentType === "rlv-vi") && (
+                <div className="col-12 col-md-4" id="facture">
+                  <label htmlFor="invoiceNumber" className="me-2">
+                    Numéro de Facture:
+                  </label>
+                  <input
+                    id="factureInput"
+                    type="text"
+                    className="form-control form-control-sm"
+                    placeholder="Entrer le numéro de facture"
+                    value={facture} // Bind to the state variable
+                    onChange={(e) => setFacture(e.target.value)} // Update state on input change
+                  />
                 </div>
               )}
             </div>
@@ -281,7 +330,7 @@ const Filter = () => {
                 </span>
               )}
               {currency && (
-                <span className="badge bg-info text-dark me-2 d-flex align-items-center">
+                <span className="badge bg-info me-2 d-flex align-items-center">
                   Devise: {currency}
                   <FaTimes
                     onClick={() => handleDeleteChip("currency")}
@@ -290,11 +339,25 @@ const Filter = () => {
                   />
                 </span>
               )}
+              {facture && (
+                <span className="badge bg-secondary me-2 d-flex align-items-center">
+                  Numéro de Facture: {facture}
+                  <FaTimes
+                    onClick={() => handleDeleteChip("facture")}
+                    className="ms-2 cursor-pointer"
+                    style={{ color: "white" }}
+                  />
+                </span>
+              )}
             </div>
             <Button
               event={handleSubmit}
-              libelle={t("filter.searchbtn")}
-              className="btn btn-outline-success float-right filter-submit"
+              libelle={
+                <>
+                  <FaSearch className="me-2" /> {t("filter.searchbtn")}
+                </>
+              }
+              className="float-right btn-green-reverse filter-submit"
               type="submit"
             />
           </form>
