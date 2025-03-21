@@ -18,7 +18,7 @@
     "@mui/styles": "^5.8.0",
     "@reduxjs/toolkit": "^1.8.1",
     "autoprefixer": "^10.4.7",
-    "axios": "^1.7.9",
+    "axios": "^1.8.2",
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
     "flatpickr": "^4.6.13",
