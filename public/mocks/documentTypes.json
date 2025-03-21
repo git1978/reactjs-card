@@ -1,0 +1,24 @@
+[
+  {
+    "label": "Factures",
+    "options": [
+      { "value": "fct", "label": "Facture" },
+      { "value": "rlv-vi", "label": "Relevés de virements internationaux" },
+      { "value": "rlv-com-cf", "label": "Relevés de commissions sur caution France" }
+    ]
+  },
+  {
+    "label": "Releves",
+    "options": [
+      { "value": "rlv-sa", "label": "Relevés de compte et synthèses d'activité" },
+      { "value": "ech-rlvi", "label": "Echelles et relevés d'intérêts" }
+    ]
+  },
+  {
+    "label": "Encaissements cartes",
+    "options": [
+      { "value": "rlv-mn", "label": "Relevés monétiques (remises)" },
+      { "value": "dct-oc", "label": "Décomptes d'opérations cartes (transactions)" }
+    ]
+  }
+]

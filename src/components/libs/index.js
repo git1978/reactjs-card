@@ -1,0 +1,6 @@
+export { iaInput } from "./iaInput"
+export { iaCheckbox } from "./iaCheckbox"
+export { iaButton } from "./iaButton"
+export { iaSpinner} from "./iaSpinner"
+export { iaModal } from "./iaModal"
+export { iaDropdown } from "./iaDropdown"

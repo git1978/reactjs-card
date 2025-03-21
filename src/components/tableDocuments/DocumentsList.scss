@@ -1,0 +1,69 @@
+.spinner {
+    border: 4px solid #f3f3f3; /* Light gray */
+    border-top: 4px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  .rotate-chevron {
+    transform: rotate(180deg);
+    transition: transform 0.3s ease;
+  }
+
+ .table-list {
+    font-family: 'Roboto', sans-serif; /* Use 'sans-serif' as a fallback */
+    font-size: 14px;
+    margin-top: 22px;
+    box-shadow: 0 4px 8px rgb(214, 214, 214);
+}
+
+.table-list th,
+.table-list td,
+.table-list td span {
+  text-align: center;
+  vertical-align: middle; /* Pour centrer aussi verticalement */
+}
+
+.table-list .d-flex {
+  display: flex;
+  justify-content: center; /* Centre horizontalement */
+  align-items: center;    /* Centre verticalement */
+  text-align: center;     /* Assure que le texte est centré dans le span */
+}
+
+.table-list td svg {
+  display: block;          /* Supprime les marges automatiques indésirables */
+  margin: 0 auto;          /* Centre horizontalement */
+}
+
+div#documentType {
+  font-family: "Roboto";
+  font-size: 12px;
+  width: 350px;
+  color: black;
+}
+
+select#periodList, div#currencyList,
+div#accountList, select#currencyList {
+    font-family: "Roboto";
+    font-size: 12px;
+    width: 350px;
+    color: black;
+}
+.rangeDate {
+  font-family: "Roboto";
+  font-size: 12px;
+  width: 250px;
+  color: black;
+}
