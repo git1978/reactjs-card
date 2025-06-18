@@ -33,7 +33,7 @@
     "react-daterange-picker": "^2.0.1",
     "react-dom": "^18.1.0",
     "react-flatpickr": "^3.10.13",
-    "react-i18next": "^15.1.4",
+    "react-i18next": "^15.5.3",
     "react-icons": "^5.4.0",
     "react-redux": "^8.0.1",
     "react-router-dom": "^7.0.1",
